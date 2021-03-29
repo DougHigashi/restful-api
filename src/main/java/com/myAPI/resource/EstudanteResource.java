@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,9 +39,24 @@ public class EstudanteResource {
 		return estudanteRepo.save(estudanteCadastrado);
 	}
 	
+	@PutMapping("/{id}")
+	public Estudante atualizarEstudante(@PathVariable("id") Long id,
+			@RequestBody Estudante estudante) {
+		return estudanteRepo.findById(id).map(
+				record -> {
+					record.setAge(estudante.getAge());
+					record.setCurso(estudante.getCurso());
+					record.setName(estudante.getName());
+					record.setRa(estudante.getRa());
+					return estudanteRepo.save(record);
+				}).orElse(null);
+	}
+	
 	@DeleteMapping("/{id}")
-	public void deleteEstudante(@PathVariable Long id) {
+	public String deleteEstudante(@PathVariable Long id) {
+		Estudante estudanteDeletado = estudanteRepo.findById(id).get();
 		estudanteRepo.deleteById(id);
+		return "Estudante " + estudanteDeletado.getName() + " deletado da base de dados.";
 	}
 	
 }

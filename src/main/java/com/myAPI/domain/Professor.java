@@ -1,24 +1,21 @@
 package com.myAPI.domain;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Estudante {
-
+public class Professor {
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	private String name;
-
-	private String ra;
-
+	
 	private int age;
-
+	
 	private String curso;
 
 	public Long getId() {
@@ -35,14 +32,6 @@ public class Estudante {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getRa() {
-		return ra;
-	}
-
-	public void setRa(String ra) {
-		this.ra = ra;
 	}
 
 	public int getAge() {
@@ -69,7 +58,6 @@ public class Estudante {
 		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((ra == null) ? 0 : ra.hashCode());
 		return result;
 	}
 
@@ -81,7 +69,7 @@ public class Estudante {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estudante other = (Estudante) obj;
+		Professor other = (Professor) obj;
 		if (age != other.age)
 			return false;
 		if (curso == null) {
@@ -99,14 +87,8 @@ public class Estudante {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (ra == null) {
-			if (other.ra != null)
-				return false;
-		} else if (!ra.equals(other.ra))
-			return false;
 		return true;
 	}
-	
 	
 	
 
